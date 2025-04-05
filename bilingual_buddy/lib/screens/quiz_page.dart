@@ -495,6 +495,7 @@ class _MCQPage extends State<MCQPage>{
                 decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
                 child: Stack(
                   children: [
+                    //Have the questions in default to english, with a button that acts as a hint to switch the questions to spanish
                     backTextMenuBar(leaveQuiz, "Lesson ${widget.lessonNum} Exercises"),
                     buttonText(shuffledAnswers[0], () => checkAnswer(0), x: 0.85, y: -0.35, width: 400, height: 156, fontSize: 48),
                     buttonText(shuffledAnswers[1], () => checkAnswer(1), x: 0.85, y: 0.25, width: 400, height: 156, fontSize: 48),

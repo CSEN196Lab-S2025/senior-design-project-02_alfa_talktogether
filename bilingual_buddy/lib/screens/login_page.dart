@@ -29,9 +29,8 @@ Future<User?> loginUser(String email, String password) async {
     
     //Does the actual login
     UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: usableEmail, password: password);
-    
-    //There might be a bug here, when you try to sign in while debugging, the exception might not 
-    //be caught (for some reason) just keep clicking "continue" or use f5 until it works
+    return userCredential.user;
+
   } catch (e) {
     log("Login Error: $e");
     return null; //Failed login
@@ -48,12 +47,13 @@ Future<User?> loginUser(String email, String password) async {
 //     //Does the actual login 
 //     UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: usableEmail, password: password);
 
-//     CollectionReference user = FirebaseFirestore.instance.collection("studentID");
-    
-//     var userDocRef = user.doc(userCredential.user!.uid);
 
-//     final userDoc = await userDocRef.get(); //this piece of shit line isn't working 
-//     //y41mj1qKMPgRMAUnAVroP1mjkKY2 <-Most recent User UID
+//     CollectionReference user = FirebaseFirestore.instance.collection("studentID");
+//     log(userCredential.user!.uid);
+//     DocumentReference userDocRef = user.doc(userCredential.user!.uid);
+
+//     final DocumentSnapshot userDoc = await userDocRef.get(); // Fetch the document snapshot
+//     //0RXs9OMJD0QaqgTUduZrgWhbtp82 <-Most recent User UID
 //     if (userDoc.exists) {
 //       Map<String, dynamic> data = userDoc.data() as Map<String, dynamic>; //Create a Student object from the data
 //       Student student = Student.fromFirebase(data);
@@ -128,11 +128,11 @@ class _LoginPageState extends State<LoginPage> {
     }
     
     //Student? student = await loginUser(email, password);
-    //User? user = await loginUser(email, password);
-    bool user = true;
+    User? user = await loginUser(email, password);
+    //bool user = true;
     
     if (user != null) {
-    // if (student != null){
+    //if (student != null){
       log("Login successful: ${email}");
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => DashboardScreen()));
