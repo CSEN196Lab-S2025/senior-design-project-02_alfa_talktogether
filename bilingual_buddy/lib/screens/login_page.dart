@@ -7,6 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'landing_page.dart';
 import 'useful_widgets.dart';
 import 'student_info.dart';
+import 'dataBase.dart';
+
 
 void signOut() async {
   await FirebaseAuth.instance.signOut();
@@ -29,6 +31,19 @@ Future<User?> loginUser(String email, String password) async {
     
     //Does the actual login
     UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: usableEmail, password: password);
+    
+    String uid = "0RXs9OMJD0QaqgTUduZrgWhbtp82";
+    DataBase _DataBase = DataBase();
+    Student? student = await _DataBase.getStudentByUID(uid); 
+
+    log(student?.info?.firstName ?? "Student info is null");
+
+    if (student != null) {
+      print("Student found: ${student.info.firstName} ${student.info.lastName}");
+    } else {
+      print("Student not found.");
+    }
+    
     return userCredential.user;
 
   } catch (e) {

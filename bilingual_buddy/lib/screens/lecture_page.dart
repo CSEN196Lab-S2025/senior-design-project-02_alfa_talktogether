@@ -21,24 +21,13 @@ class PDFContainerWidget extends StatelessWidget {
             return Container(
               width: 1042,
               height: 614,
-              decoration: ShapeDecoration(
-                color: const Color(0xFFEEEEEE),
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(width: 1),
-                  borderRadius: BorderRadius.circular(84),
-                ),
-              ),
+              
+
               //child: ClipRRect(
                 //borderRadius: BorderRadius.circular(84),
                 child: Container(
                   padding: EdgeInsets.all(20), // Add padding to create space around the PDFView
-                  decoration: ShapeDecoration(
-                    color: const Color(0xFFEEEEEE),
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(width: 1),
-                      borderRadius: BorderRadius.circular(84),
-                    ),
-                  ),
+                  color: const Color(0xFF0C2D57),
                   child: PDFView(
                     filePath: snapshot.data!,
                     fitPolicy: FitPolicy.BOTH,
